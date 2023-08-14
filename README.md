@@ -39,6 +39,7 @@ Things you may want to cover:
 | encrypted_password           | string   | null: false               |
 ### Association
 -has_many :items
+-has_many :orders
 -has_one :deliver_adresses
 
 ## items テーブル
@@ -68,7 +69,9 @@ Things you may want to cover:
 | item          | references | null: false, foreign_key: true |
 ## Association
 -has_one :deliver_adress
--belongs_to :order
+-belongs_to :user
+-belongs_to :item
+
 
 ## deliver_adressesテーブル
 
