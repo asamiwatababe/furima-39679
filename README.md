@@ -51,10 +51,10 @@ Things you may want to cover:
 | category_id         | integer    | null: false, foreign_key: true | ## カテゴリー
 | item_status_id      | integer    | null: false                    | ## 商品の状態
 | name	              | string     | null: false                    | ## 商品名
-| shipping_charge_id | integer    | null: false, foreign_key: true | ## 配送料
+| shipping_charge_id  | integer    | null: false, foreign_key: true | ## 配送料
 | prefecture_id       | integer    | null: false                    | ## 発送元の地域
 | price	              | integer    | null: false                    | ## 販売価格
-| day_to_ship_id     | integer    | null: false                    | ## 発送までの日数 
+| day_to_ship_id      | integer    | null: false                    | ## 発送までの日数 
 ### Association
 -belongs_to :user
 -has_one :order
@@ -67,7 +67,6 @@ Things you may want to cover:
 | user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
 ## Association
--has_one :deliver_adress
 -belongs_to :user
 -belongs_to :item
 
