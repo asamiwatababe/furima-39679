@@ -41,6 +41,7 @@ Things you may want to cover:
 -has_many :items
 -has_many :orders
 
+
 ## items テーブル
 
 | Column              | Type       | Options                        |
@@ -68,6 +69,7 @@ Things you may want to cover:
 ## Association
 -belongs_to :user
 -belongs_to :item
+-has_one :deliver_adresses
 
 
 ## deliver_adressesテーブル
