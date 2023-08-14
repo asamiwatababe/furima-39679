@@ -69,7 +69,7 @@ Things you may want to cover:
 ## Association
 -belongs_to :user
 -belongs_to :item
--has_one :deliver_adresses
+-has_one :deliver_adress
 
 
 ## deliver_adressesテーブル
