@@ -37,12 +37,15 @@ Things you may want to cover:
 | birth_day	                   | date     | null: false               |
 | email                        | string   | null: false, unique: true | 
 | encrypted_password           | string   | null: false               |
+### Association
+-has_many :items
+-has_one :deliver_adresses
 
 ## items テーブル
 
 | Column              | Type       | Options                        |
 | --------------------| ---------- | ------------------------------ |
-| user                | references | null: false, foreign_key: true | ## 商品画像
+| user                | references | null: false, foreign_key: true | ## user
 | description         | text       | null: false                    | ## 商品の説明
 | category_id         | integer    | null: false, foreign_key: true | ## カテゴリー
 | shipping            | references | null: false, foreign_key: true | ## 配送
@@ -53,6 +56,9 @@ Things you may want to cover:
 | price	              | string     | null: false                    | ## 販売価格
 | days_to_ship_id     | integer    | null: false                    | ## 発送までの日数 
 ### Association
+-belongs_to :user
+-belongs_to :category
+-belongs_to :
 
 
 ## orders テーブル
@@ -75,5 +81,7 @@ Things you may want to cover:
 | prefecture       | string     | null: false                    |
 | city             | string     | null: false                    |
 | telephone        | string     | null: false, unique: true      |
+### Association
+-belongs_to_user
 
 
