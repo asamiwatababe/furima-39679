@@ -79,7 +79,7 @@ Things you may want to cover:
 | city             | string     | null: false                    |
 | telephone        | string     | null: false,                   |
 ### Association
--belongs_to_order
+-belongs_to :order
 
 
 ## mistake
