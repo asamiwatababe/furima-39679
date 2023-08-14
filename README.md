@@ -73,11 +73,13 @@ Things you may want to cover:
 
 | Column	       | Type	    | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| user_id          | references | null: false, unique: true      |
+| item_id          | references | null: false, unique: true      |
 | zip_code         | string     | null: false                    |
 | prefecture_id    | integer    | null: false                    |
 | city             | string     | null: false                    |
-| telephone        | string     | null: false,                   |
+| telephone        | string     | null: false                    |
+| street           | string     | null: false                    |
+| building_name    | string     | null: false                    |
 ### Association
 -belongs_to :order
 
