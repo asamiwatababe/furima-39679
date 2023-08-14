@@ -57,8 +57,7 @@ Things you may want to cover:
 | days_to_ship_id     | integer    | null: false                    | ## 発送までの日数 
 ### Association
 -belongs_to :user
--belongs_to :category
--belongs_to :order
+-has_one :order
 
 
 ## orders テーブル
