@@ -48,17 +48,16 @@ Things you may want to cover:
 | user                | references | null: false, foreign_key: true | ## user
 | description         | text       | null: false                    | ## 商品の説明
 | category_id         | integer    | null: false, foreign_key: true | ## カテゴリー
-| shipping            | references | null: false, foreign_key: true | ## 配送
-| shipping_charges_id | integer    | null: false, foreign_key: true | ## 配送料
-| region_of_origin_id | integer    | null: false                    | ## 発送元の地域
 | item_status_id      | integer    | null: false                    | ## 商品の状態
 | name	              | string     | null: false                    | ## 商品名
-| price	              | string     | null: false                    | ## 販売価格
+| shipping_charges_id | integer    | null: false, foreign_key: true | ## 配送料
+| prefecture_id       | integer    | null: false                    | ## 発送元の地域
+| price	              | integer    | null: false                    | ## 販売価格
 | days_to_ship_id     | integer    | null: false                    | ## 発送までの日数 
 ### Association
 -belongs_to :user
 -belongs_to :category
--belongs_to :
+-belongs_to :order
 
 
 ## orders テーブル
@@ -67,21 +66,23 @@ Things you may want to cover:
 | ------------- | ---------- | ------------------------------ |
 | user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
+## Association
+-belongs_to :order
 
 ## deliver_adressesテーブル
 
 | Column	       | Type	    | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| user_id          | references | null: false, foreign_key: true |
-| family_name      | string     | null: false                    |
-| first_name       | string     | null: false                    |
-| family_name_kana | string     | null: false                    |
-| first_name_kana  | string     | null: false                    |
-| zip_code         | integer    | null: false                    |
-| prefecture       | string     | null: false                    |
+| user_id          | references | null: false, unique: true      |
+| zip_code         | string     | null: false                    |
+| prefecture_id    | integer    | null: false                    |
 | city             | string     | null: false                    |
-| telephone        | string     | null: false, unique: true      |
+| telephone        | string     | null: false,                   |
 ### Association
--belongs_to_user
+-belongs_to_order
 
 
+## mistake
+## | shipping            | references | null: false, foreign_key: true | ## 配送
+## | shipping_charges_id | integer    | null: false, foreign_key: true | ## 配送料
+## | region_of_origin_id | integer    | null: false                    | ## 発送元の地域
