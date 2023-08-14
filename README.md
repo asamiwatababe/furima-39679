@@ -73,14 +73,14 @@ Things you may want to cover:
 
 ## deliver_adressesテーブル
 
-| Column	       | Type	    | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| order            | references | null: false, unique: true      |
-| zip_code         | string     | null: false                    |
-| prefecture_id    | integer    | null: false                    |
-| city             | string     | null: false                    |
-| telephone        | string     | null: false                    |
-| street           | string     | null: false                    |
+| Column	       | Type	    | Options     |
+| ---------------- | ---------- | ----------- |
+| order            | references | null: false |
+| zip_code         | string     | null: false |
+| prefecture_id    | integer    | null: false |
+| city             | string     | null: false |
+| telephone        | string     | null: false |
+| street           | string     | null: false |
 | building_name    | string     |                    
 ### Association
 -belongs_to :order
