@@ -81,7 +81,7 @@ Things you may want to cover:
 | city             | string     | null: false                    |
 | telephone        | string     | null: false                    |
 | street           | string     | null: false                    |
-| building_name    | string     | null: false                    |
+| building_name    | string     |                    
 ### Association
 -belongs_to :order
 
