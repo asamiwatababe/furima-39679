@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="U7zVAFiTEnIZENK7jrsj" name="ページ1">
-        <mxGraphModel dx="896" dy="622" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1066" dy="622" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -106,20 +106,17 @@
                 <mxCell id="74" value="has_many :items" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
                     <mxGeometry x="230" y="135" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="75" value="has_one :deliver_adresses" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-                    <mxGeometry x="210" y="105" width="170" height="30" as="geometry"/>
-                </mxCell>
                 <mxCell id="76" value="belongs_to_ :user" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
                     <mxGeometry x="600" y="130" width="120" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="78" value="has_one :order" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
                     <mxGeometry x="605" y="100" width="110" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="80" value="belongs_t0 :order" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                <mxCell id="80" value="belongs_to :order" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
                     <mxGeometry x="707" y="208" width="120" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="83" value="has_many :orders" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-                    <mxGeometry x="235" y="80" width="120" height="30" as="geometry"/>
+                    <mxGeometry x="230" y="105" width="120" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
