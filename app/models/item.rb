@@ -1,4 +1,8 @@
 class Item < ApplicationRecord
+
+    belongs_to :user
+    has_one :order
+
     validates :user,        presence: true
     validates :description, presence: true
     validates :item_status, presence: true
