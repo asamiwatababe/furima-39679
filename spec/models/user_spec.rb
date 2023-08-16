@@ -149,8 +149,8 @@ RSpec.describe User, type: :model do
       end
     
       it 'パスワードが半角数字のみでは登録できないこと' do
-        @user.password = '123456'
-        @user.password_confirmation = '123456'
+        @user.password = '123456password'
+        @user.password_confirmation = '123456password'
         expect(@user.errors.full_messages).to include("Cannot register with a password containing full-width characters")
       end
     
@@ -158,6 +158,12 @@ RSpec.describe User, type: :model do
         @user.password = 'paｓｓｗｏｒｄ123'
         @user.password_confirmation = 'paｓｓｗｏｒｄ123'
         expect(@user.errors.full_messages).to include("Cannot register with a password containing full-width characters")
+      end
+
+      it 'メールアドレスに@を含まない場合は登録できない' do
+        @user.email = 'testmail'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('MailEmail is invalid')
       end
     end
   end
