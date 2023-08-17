@@ -23,8 +23,8 @@
         </p>
         <%= f.file_field :image, id:"item-image" %>
       </div>
-      <% if message.image.attached? %>
-        <%= image_tag message.image, class: 'message-image' %>
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, class: 'message-image' %>
       <% end %>
     </div>
     <%# /商品画像 %>
