@@ -17,8 +17,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_225933) do
   end
 
   create_table "items", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "description", null: false
+    t.integer "category_id", null: false
+    t.integer "item_status_id", null: false
+    t.string "name", null: false
+    t.integer "shipping_charge_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "price", null: false
+    t.integer "day_to_ship_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
