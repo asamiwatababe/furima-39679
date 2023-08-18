@@ -23,9 +23,9 @@ class Item < ApplicationRecord
     validates :day_to_ship_id, presence: true
 
     extend ActiveHash::Associations::ActiveRecordExtensions
-    belongs_to :category
-    belongs_to :item_status
-    belongs_to :shipping_charge
-    belongs_to :prefecture
-    belongs_to :day_to_ship
+    belongs_to :category, class_name: 'Category'
+    belongs_to :item_status, class_name: 'ItemStatus'
+    belongs_to :shipping_charge, class_name: 'ShippingCharge'
+    belongs_to :prefecture, class_name: 'Prefecture'
+    belongs_to :day_to_ship, class_name: 'DayToShip'
 end
