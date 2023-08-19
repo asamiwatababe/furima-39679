@@ -6,6 +6,19 @@ RSpec.describe Item, type: :model do
   end
 
   context '商品が投稿できる場合' do
+    it '全ての項目が入力されていれば出品できる' do
+      @item.category_id = 1  # カテゴリーの適切な値を設定
+      @item.item_status_id = 1  # 商品の状態の適切な値を設定
+      @item.name = 'Example Item'
+      @item.shipping_charge_id = 1  # 配送料の適切な値を設定
+      @item.prefecture_id = 1  # 都道府県の適切な値を設定
+      @item.price = 1000
+      @item.day_to_ship_id = 1  # 発送日の適切な値を設定
+      @item.description = 'This is an example item.'
+      @item.image = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'example_image.jpg'), 'image/jpeg')  # 画像のアップロードをシミュレート
+
+      expect(@item).to be_valid
+    end
     it '画像と名前を保存できる' do
       expect(@item).to be_valid
     end
