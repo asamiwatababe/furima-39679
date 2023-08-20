@@ -13,6 +13,10 @@ RSpec.describe Item, type: :model do
     it '画像と名前を保存できる' do
       expect(@item).to be_valid
     end
+    it 'imageが空でも保存できる' do
+      @item.image = nil
+      expect(@item).to be_valid
+    end
   end
 
   context '商品が投稿できない場合' do
