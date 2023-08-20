@@ -13,10 +13,6 @@ RSpec.describe Item, type: :model do
     it '画像と名前を保存できる' do
       expect(@item).to be_valid
     end
-    it 'imageが空でも保存できる' do
-      @item.image = nil
-      expect(@item).to be_valid
-    end
   end
 
   context '商品が投稿できない場合' do
@@ -90,6 +86,12 @@ RSpec.describe Item, type: :model do
       @item.user = nil  # userを紐付けていない状態にする
       @item.valid?
       expect(@item.errors.full_messages).to include("User must exist")
+    end
+
+    it '商品画像が空では出品できない' do
+      @item.image = nil # 商品画像を空に設定
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image can't be blank")
     end
   end
 end
