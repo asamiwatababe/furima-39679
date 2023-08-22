@@ -17,7 +17,6 @@ class ItemsController < ApplicationController
       if @item.save
         redirect_to root_path
       else
-        # flash.now[:error] = @item.errors.full_messages
         render 'new',status: :unprocessable_entity
       end
     end
