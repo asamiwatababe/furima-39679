@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   #before_action :set_item,except: [:index, :new, :create]
-  before_action :authenticate_user!, only: [:new, :create]
-
+  before_action :authenticate_user!, only: [:new, :create, :show]# ログインしていない場合、showアクションを制限
+  
     def index 
       @items = Item.all.order(created_at: :desc)  # 作成日時の新しい順に並べ替え  
     end
