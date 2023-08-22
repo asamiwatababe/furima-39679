@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:show, :edit, :update]
   #before_action :set_item,except: [:index, :new, :create]
   before_action :authenticate_user!, only: [:new, :create, :show]# ログインしていない場合、showアクションを制限
   
