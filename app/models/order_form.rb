@@ -12,4 +12,8 @@ class OrderForm
         validates :street
     end
 
+    def save(params,user_id)
+        order = Order.create(item_id: params[:item_id].to_i, user_id: user_id)
+        Address.create(zip_code: zip_code, prefecture_id: prefecture_id, city: city, telephone: telephone, street: street, building_name: building_name, order_id: order.id)
+    end
 end
