@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
-  #has_many :orders
+  has_many :orders
 
   ## パスワードの半角英数字混合入力必須
   ## 氏名それぞれ全角ひらがな漢字カタカナ入力必須
