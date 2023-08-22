@@ -69,10 +69,10 @@ Things you may want to cover:
 ## Association
 -belongs_to :user
 -belongs_to :item
--has_one :deliver_adress
+-has_one :deliver
 
 
-## deliver_adressesテーブル
+## deliverテーブル
 
 | Column	       | Type	    | Options                        |
 | ---------------- | ---------- | ------------------------------ |
