@@ -7,9 +7,9 @@ FactoryBot.define do
     city           { Faker::Address.city}
     street         { Faker::Address.street}
     building_name  { Faker::Address.building_number}
-    phone          { "0" + Faker::Number.between(from: 100000000, to: 9999999999).to_s }  
+    telephone      { "0" + Faker::Number.between(from: 100000000, to: 9999999999).to_s }  
 
-    association :item
-    association :user
+    #association :item
+    #association :user
   end
 end

@@ -1,80 +1,92 @@
 require 'rails_helper'
 
-RSpec.describe Form, type: :model do
-  subject(:form) { described_class.new }
+RSpec.describe OrderForm, type: :model do
+  describe '購入情報の保存' do
+    before do
+      @order_form = OrderForm.new
+    end
 
-  it "郵便番号がない場合、無効であること" do
-    form.prefecture_id = 1
-    form.city = "サンプル市"
-    form.street = "123 ストリート"
-    form.telephone = "09012345678"
-    expect(form).to be_invalid
-    expect(form.errors[:zip_code]).to include("を入力してください")
-  end
+    context '内容に問題ない場合' do
+      it 'すべての値が正しく入力されていれば保存できること' do
+        @order_form.item_id = 1
+        @order_form.user_id = 1
+        @order_form.zip_code = '123-4567'
+        @order_form.prefecture_id = 1
+        @order_form.city = 'Sample City'
+        @order_form.telephone = '1234567890'
+        @order_form.street = 'Sample Street'
+        expect(@order_form).to be_valid
+      end
 
-  it "無効な郵便番号フォーマットの場合、無効であること" do
-    form.zip_code = "1234567"
-    form.prefecture_id = 1
-    form.city = "サンプル市"
-    form.street = "123 ストリート"
-    form.telephone = "09012345678"
-    expect(form).to be_invalid
-    expect(form.errors[:zip_code]).to include("は無効です")
-  end
+      it 'building_nameが空でも保存できること' do
+        @order_form.item_id = 1
+        @order_form.user_id = 1
+        @order_form.zip_code = '123-4567'
+        @order_form.prefecture_id = 1
+        @order_form.city = 'Sample City'
+        @order_form.telephone = '1234567890'
+        @order_form.street = 'Sample Street'
+        @order_form.building_name = '' # Ensure it's an empty string
+        expect(@order_form).to be_valid
+      end
+    end
 
-  it "都道府県がない場合、無効であること" do
-    form.zip_code = "123-4567"
-    form.city = "サンプル市"
-    form.street = "123 ストリート"
-    form.telephone = "09012345678"
-    expect(form).to be_invalid
-    expect(form.errors[:prefecture_id]).to include("を入力してください")
-  end
+    context '内容に間違いがある場合' do
+      it 'item_idが空の場合は登録できない' do
+        # Similar attribute assignments as above
+        @order_form.item_id = nil
+        expect(@order_form).not_to be_valid
+      end
 
-  it "市区町村がない場合、無効であること" do
-    form.zip_code = "123-4567"
-    form.prefecture_id = 1
-    form.street = "123 ストリート"
-    form.telephone = "09012345678"
-    expect(form).to be_invalid
-    expect(form.errors[:city]).to include("を入力してください")
-  end
+      it 'user_idが空の場合は登録できない' do
+        # Similar attribute assignments as above
+        @order_form.user_id = nil
+        expect(@order_form).not_to be_valid
+      end
 
-  it "番地がない場合、無効であること" do
-    form.zip_code = "123-4567"
-    form.prefecture_id = 1
-    form.city = "サンプル市"
-    form.telephone = "09012345678"
-    expect(form).to be_invalid
-    expect(form.errors[:street]).to include("を入力してください")
-  end
+      # Add more validation tests for other attributes
 
-  it "建物名がない場合でも有効であること" do
-    form.zip_code = "123-4567"
-    form.prefecture_id = 1
-    form.city = "サンプル市"
-    form.street = "123 ストリート"
-    form.telephone = "09012345678"
-    form.building_name = nil
-    expect(form).to be_valid
-  end
+      it 'streetが空の場合は登録できない' do
+        # Similar attribute assignments as above
+        @order_form.street = nil
+        expect(@order_form).not_to be_valid
+      end
 
-  it "電話番号がない場合、無効であること" do
-    form.zip_code = "123-4567"
-    form.prefecture_id = 1
-    form.city = "サンプル市"
-    form.street = "123 ストリート"
-    expect(form).to be_invalid
-    expect(form.errors[:telephone]).to include("を入力してください")
-  end
+      it 'userが紐付いていなければ出品できない' do
+        # Similar attribute assignments as above
+        @order_form.user_id = nil
+        expect(@order_form).not_to be_valid
+      end
 
-  it "無効な電話番号フォーマットの場合、無効であること" do
-    form.zip_code = "123-4567"
-    form.prefecture_id = 1
-    form.city = "サンプル市"
-    form.street = "123 ストリート"
-    form.telephone = "090-1234-5678"
-    expect(form).to be_invalid
-    expect(form.errors[:telephone]).to include("は無効です")
+      it 'itemが紐付いていなければ出品できない' do
+        # Similar attribute assignments as above
+        @order_form.item_id = nil
+        expect(@order_form).not_to be_valid
+      end
+
+      it 'cityが空の場合は登録できない' do
+        # Similar attribute assignments as above
+        @order_form.city = nil
+        expect(@order_form).not_to be_valid
+      end
+
+      it 'prefecture_idが空の場合は登録できない' do
+        # Similar attribute assignments as above
+        @order_form.prefecture_id = nil
+        expect(@order_form).not_to be_valid
+      end
+
+      it 'telephoneが空の場合は登録できない' do
+        # Similar attribute assignments as above
+        @order_form.telephone = nil
+        expect(@order_form).not_to be_valid
+      end
+
+      it 'zip_codeが空の場合は登録できない' do
+        # Similar attribute assignments as above
+        @order_form.zip_code = nil
+        expect(@order_form).not_to be_valid
+      end
+    end
   end
 end

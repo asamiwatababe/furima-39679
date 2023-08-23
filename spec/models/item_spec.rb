@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item) 
-    #@item.image = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'example_image.jpg'), 'image/jpeg') 
   end
 
   context '商品が投稿できる場合' do
