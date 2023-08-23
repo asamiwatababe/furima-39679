@@ -7,13 +7,13 @@
     </h1>
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
-      <%= image_tag "item-sample.png", class: 'buy-item-img' %>
+      <%= image_tag @item.image, class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
           <%= @item.name %>
         </h2>
         <div class='buy-item-price'>
-          <p class='item-price-text'>¥<%= '999,999,999' %></p>
+          <p class='item-price-text'>¥<%= @item.price %></p>
           <p class='item-price-sub-text'><%= @item.shipping_charge.shipping_charge %></p>
         </div>
       </div>
@@ -31,8 +31,9 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with id: 'charge-form', class: 'transaction-form-wrap',model: [@item, @orderform], url: item_order_path(@item), local: true do |f| %>
-    <%= render 'shared/error_messages', model: @orderform %>
+    <%#= form_with id: 'charge-form', class: 'transaction-form-wrap',model: @order_form, url: item_order_path(@item), local: true do |f| %>
+    <%= form_with id: 'charge-form', class: 'transaction-form-wrap',model: [@item, @order_form], url: item_orders_path(@item), local: true do |f| %>
+    <%= render 'shared/error_messages', model: @order_form %>
     
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
