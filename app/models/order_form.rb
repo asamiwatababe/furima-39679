@@ -1,6 +1,6 @@
 class OrderForm
     include ActiveModel::Model
-    attr_accessor :item_id, :user_id, :zip_code, :prefecture_id, :city, :telephone, :street, :building_name #deliverテーブルのカラム
+    attr_accessor :item_id, :user_id, :zip_code, :prefecture_id, :city, :telephone, :street, :building_name, :token #deliverテーブルのカラム
 
     with_options presence: true do
         validates :item_id
@@ -10,6 +10,7 @@ class OrderForm
         validates :city
         validates :telephone, format: { with: /\A\d{10,11}\z/,message: "is invalid. Include hyphen(-)"}
         validates :street
+        validates :token
     end
 
     def save(params,user_id)

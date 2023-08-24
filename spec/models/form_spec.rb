@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe OrderForm, type: :model do
   describe '購入情報の保存' do
     before do
-      @order_form = OrderForm.new
+      @order_form = OrderForm.build(:order_form)#new
     end
 
     context '内容に問題ない場合' do
@@ -15,6 +15,7 @@ RSpec.describe OrderForm, type: :model do
         @order_form.city = 'Sample City'
         @order_form.telephone = '1234567890'
         @order_form.street = 'Sample Street'
+        @order_form.token = 'valid_token'
         expect(@order_form).to be_valid
       end
 
@@ -26,6 +27,7 @@ RSpec.describe OrderForm, type: :model do
         @order_form.city = 'Sample City'
         @order_form.telephone = '1234567890'
         @order_form.street = 'Sample Street'
+        @order_form.token = 'valid_token'
         @order_form.building_name = '' # Ensure it's an empty string
         expect(@order_form).to be_valid
       end
@@ -85,6 +87,11 @@ RSpec.describe OrderForm, type: :model do
       it 'zip_codeが空の場合は登録できない' do
         # Similar attribute assignments as above
         @order_form.zip_code = nil
+        expect(@order_form).not_to be_valid
+      end
+
+      it "tokenが空では登録できないこと" do
+        @order_form.token = nil
         expect(@order_form).not_to be_valid
       end
     end
