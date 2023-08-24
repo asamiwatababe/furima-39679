@@ -22,7 +22,11 @@ class ItemsController < ApplicationController
     end
 
     def show
-      
+      if user_signed_in? && !(current_user == @item.user && @item.order.present?)
+        # 商品の表示処理
+      else
+        redirect_to root_path
+      end  
     end
 
     def destroy
@@ -36,7 +40,7 @@ class ItemsController < ApplicationController
     end
 
     def edit
-      
+      #if current_user == @item.user && @item.order.nil?
       unless current_user.id == @item.user_id
         redirect_to root_path
       end

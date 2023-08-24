@@ -13,7 +13,7 @@ class OrderForm
         validates :token
     end
 
-    def save(params,user_id)
+    def save
         order = Order.create(user_id: user_id, item_id: item_id)
         Deliver.create(zip_code: zip_code, prefecture_id: prefecture_id, city: city, telephone: telephone, street: street, building_name: building_name, order_id: order.id)
     end

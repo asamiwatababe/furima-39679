@@ -87,7 +87,3 @@ Things you may want to cover:
 -belongs_to :order
 
 
-## mistake
-## | shipping            | references | null: false, foreign_key: true | ## 配送
-## | shipping_charges_id | integer    | null: false, foreign_key: true | ## 配送料
-## | region_of_origin_id | integer    | null: false                    | ## 発送元の地域

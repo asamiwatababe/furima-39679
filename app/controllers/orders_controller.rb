@@ -7,22 +7,20 @@ class OrdersController < ApplicationController
     @order_form = OrderForm.new
   end
 
-  #def new
-    #@item = Item.find(params[:item_id])
-    #@order_form = OrderForm.new
-  #end
-
   def create 
+    @item = Item.find(params[:item_id])
     @order_form = OrderForm.new(order_form_params)
     if @order_form.valid?
       pay_item
-       @order_form.save(current_user.id)
+       @order_form.save
        redirect_to root_path
     else
       @item = Item.find(params[:item_id])
-      render :index, status: :unprocessable_entity
+      render :index
     end
   end
+
+  
 
   private
 
@@ -33,9 +31,9 @@ class OrdersController < ApplicationController
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-        amount: order_form_params[:price],
+        amount: @item.price,
         card: order_form_params[:token],    # カードトークン
-        currency: 'jpy'                 # 通貨の種類（日本円）
+        currency: 'jpy'                 
     )
   end
 
