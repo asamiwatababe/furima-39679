@@ -42,6 +42,12 @@ RSpec.describe OrderForm, type: :model do
       expect(@order_form.errors.full_messages).to include("Telephone can't be blank")
     end
 
+    it 'telephoneは半角数字以外が含まれている場合は購入できない' do
+      @order_form.telephone = '1a2b3c'  
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
+    end
+
     it 'streetが空では登録できない' do
       @order_form.street = ''
       @order_form.valid?
