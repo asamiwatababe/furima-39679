@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :order] #ログアウトユーザーへの対策
   before_action :prevent_url, only: [:edit, :update, :destroy ]
   
-  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]# ログインしていない場合、アクションを制限
   
     def index 
       @items = Item.all.order(created_at: :desc)  # 作成日時の新しい順に並べ替え  

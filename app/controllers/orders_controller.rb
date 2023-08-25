@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
 
 
   def prevent_url
-    if @item.user_id != current_user.id || @item.order != nil
+    if @item.user_id == current_user.id || @item.order.present?
       redirect_to root_path
     end
   end
