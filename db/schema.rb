@@ -62,11 +62,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_082653) do
     t.index ["order_id"], name: "index_delivers_on_order_id"
   end
 
-  create_table "furimas", charset: "utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "items", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "description", null: false

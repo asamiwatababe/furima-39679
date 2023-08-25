@@ -1,12 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
-  before do
-    @order_form = FactoryBot.build(:order_form) 
-  end
+  describe '購入の保存' do
+    before do
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
+      @order_form = FactoryBot.build(:order_form, user_id: @user.id, item_id: @item.id)
+    end
+  
 
   context '商品が購入できる場合' do
+    it 'すべての情報があればそろっていれば保存できる' do
+      expect(@order_form).to be_valid
+    end
+
     it 'building_nameが空でも保存できる' do
+      @order_form.building_name = ''
       expect(@order_form).to be_valid
     end
   end
@@ -45,7 +54,25 @@ RSpec.describe OrderForm, type: :model do
     it 'telephoneは半角数字以外が含まれている場合は購入できない' do
       @order_form.telephone = '1a2b3c'  
       @order_form.valid?
-      expect(@order_form.errors.full_messages).to include("Telephone is invalid. Include hyphen(-)")
+      expect(@order_form.errors.full_messages).to include("Telephone is invalid")
+    end
+
+    it 'telephoneが9桁以下では購入できない' do
+      @order_form.telephone = '123456789'
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Telephone is invalid")
+    end
+
+    it 'telephoneが12桁以上では購入できない' do
+      @order_form.telephone = '1234567890123'
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Telephone is invalid")
+    end
+
+    it 'tokenが空では登録できない' do
+      @order_form.token = nil
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Token can't be blank")
     end
 
     it 'streetが空では登録できない' do
@@ -66,4 +93,5 @@ RSpec.describe OrderForm, type: :model do
       expect(@order_form.errors.full_messages).to include("Item can't be blank")
     end
   end
+end
 end
