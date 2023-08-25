@@ -1,15 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
   before_action :prevent_url, only: [:index, :create]
   
   def index 
-    @item = Item.find(params[:item_id])
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_form = OrderForm.new
   end
 
   def create 
-    @item = Item.find(params[:item_id])
     @order_form = OrderForm.new(order_form_params)
     if @order_form.valid?
       pay_item
@@ -22,6 +21,11 @@ class OrdersController < ApplicationController
   end 
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
 
   def prevent_url
     if @item.user_id != current_user.id || @item.order != nil
