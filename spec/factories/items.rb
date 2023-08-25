@@ -10,7 +10,7 @@ FactoryBot.define do
     price                 { Faker::Number.between(from: 100, to: 100000) }
 
     association :user
-    association :order
+    
 
 
     after(:build) do |item|
