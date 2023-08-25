@@ -1,99 +1,63 @@
 require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
-  describe '購入情報の保存' do
-    before do
-      @order_form = OrderForm.build(:order_form)#new
+  before do
+    @order_form = FactoryBot.build(:order_form) 
+  end
+
+  context '商品が購入できる場合' do
+    it 'building_nameが空でも保存できる' do
+      expect(@order_form).to be_valid
+    end
+  end
+
+  context '商品が購入できない場合' do
+    it 'zip_codeが空では登録できない' do
+      @order_form.zip_code = ''
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Zip code can't be blank")
     end
 
-    context '内容に問題ない場合' do
-      it 'すべての値が正しく入力されていれば保存できること' do
-        @order_form.item_id = 1
-        @order_form.user_id = 1
-        @order_form.zip_code = '123-4567'
-        @order_form.prefecture_id = 1
-        @order_form.city = 'Sample City'
-        @order_form.telephone = '1234567890'
-        @order_form.street = 'Sample Street'
-        @order_form.token = 'valid_token'
-        expect(@order_form).to be_valid
-      end
-
-      it 'building_nameが空でも保存できること' do
-        @order_form.item_id = 1
-        @order_form.user_id = 1
-        @order_form.zip_code = '123-4567'
-        @order_form.prefecture_id = 1
-        @order_form.city = 'Sample City'
-        @order_form.telephone = '1234567890'
-        @order_form.street = 'Sample Street'
-        @order_form.token = 'valid_token'
-        @order_form.building_name = '' # Ensure it's an empty string
-        expect(@order_form).to be_valid
-      end
+    it 'zip_codeは半角数字以外が含まれている場合は購入できない' do
+      @order_form.zip_code = '1a2b3c'  # 数字以外を含むzipcodeを設定
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Zip code is invalid. Include hyphen(-)")
     end
 
-    context '内容に間違いがある場合' do
-      it 'item_idが空の場合は登録できない' do
-        # Similar attribute assignments as above
-        @order_form.item_id = nil
-        expect(@order_form).not_to be_valid
-      end
+    it '都道府県が空では登録できない' do
+      @order_form.prefecture_id = '1'
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Prefecture can't be blank")
+    end
 
-      it 'user_idが空の場合は登録できない' do
-        # Similar attribute assignments as above
-        @order_form.user_id = nil
-        expect(@order_form).not_to be_valid
-      end
+    it 'cityが空では登録できない' do
+      @order_form.city = ''
+      @order_form.valid? 
+      expect(@order_form.errors.full_messages).to include("City can't be blank")
+    end
 
-      # Add more validation tests for other attributes
+    it 'telephoneが空では登録できない' do
+      @order_form.telephone = ''
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Telephone can't be blank")
+    end
 
-      it 'streetが空の場合は登録できない' do
-        # Similar attribute assignments as above
-        @order_form.street = nil
-        expect(@order_form).not_to be_valid
-      end
+    it 'streetが空では登録できない' do
+      @order_form.street = ''
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Street can't be blank")
+    end
 
-      it 'userが紐付いていなければ出品できない' do
-        # Similar attribute assignments as above
-        @order_form.user_id = nil
-        expect(@order_form).not_to be_valid
-      end
+    it 'userが紐付いていなければ購入できない' do
+      @order_form.user_id = nil  # userを紐付けていない状態にする
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("User can't be blank")
+    end
 
-      it 'itemが紐付いていなければ出品できない' do
-        # Similar attribute assignments as above
-        @order_form.item_id = nil
-        expect(@order_form).not_to be_valid
-      end
-
-      it 'cityが空の場合は登録できない' do
-        # Similar attribute assignments as above
-        @order_form.city = nil
-        expect(@order_form).not_to be_valid
-      end
-
-      it 'prefecture_idが空の場合は登録できない' do
-        # Similar attribute assignments as above
-        @order_form.prefecture_id = nil
-        expect(@order_form).not_to be_valid
-      end
-
-      it 'telephoneが空の場合は登録できない' do
-        # Similar attribute assignments as above
-        @order_form.telephone = nil
-        expect(@order_form).not_to be_valid
-      end
-
-      it 'zip_codeが空の場合は登録できない' do
-        # Similar attribute assignments as above
-        @order_form.zip_code = nil
-        expect(@order_form).not_to be_valid
-      end
-
-      it "tokenが空では登録できないこと" do
-        @order_form.token = nil
-        expect(@order_form).not_to be_valid
-      end
+    it 'itemが紐付いていなければ購入できない' do
+      @order_form.item_id= nil  # itemを紐付けていない状態にする
+      @order_form.valid?
+      expect(@order_form.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
