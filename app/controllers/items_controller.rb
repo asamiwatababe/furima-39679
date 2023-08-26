@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  #before_action :set_item,except: [:index, :new, :create]
-  before_action :authenticate_user!, only: [:new, :create, :show, :edit, :destroy]# ログインしていない場合、アクションを制限
-  #before_action :contributor_confirmation, only: [:edit, :update, :destroy]# 特定の事前確認,制限
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :show]
+  before_action :authenticate_user!, except: [:index, :show, :order] #ログアウトユーザーへの対策
+  before_action :prevent_url, only: [:edit, :update, :destroy ]
+  
   
     def index 
       @items = Item.all.order(created_at: :desc)  # 作成日時の新しい順に並べ替え  
@@ -12,6 +12,9 @@ class ItemsController < ApplicationController
       @item = Item.new
     end
 
+    def show
+    end
+
     def create
       @item = Item.new(item_params)
       if @item.save
@@ -19,10 +22,6 @@ class ItemsController < ApplicationController
       else
         render 'new',status: :unprocessable_entity
       end
-    end
-
-    def show
-      
     end
 
     def destroy
@@ -36,14 +35,12 @@ class ItemsController < ApplicationController
     end
 
     def edit
-      
       unless current_user.id == @item.user_id
         redirect_to root_path
       end
     end
   
     def update
-      
       if @item.update(item_params)
         redirect_to item_path(@item)
       else
@@ -55,6 +52,12 @@ class ItemsController < ApplicationController
 
     def set_item
       @item = Item.find(params[:id])
+    end
+
+    def prevent_url
+      if @item.user_id != current_user.id || @item.order != nil
+        redirect_to root_path
+      end
     end
 
     def item_params
