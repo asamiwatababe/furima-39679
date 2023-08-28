@@ -3,6 +3,15 @@ ja:
     attributes:
       user:
         nickname: ニックネーム
-      tweet:
+      item:
         text: テキスト
         image: 画像
+        name: 名前
+        category: カテゴリー
+        item: アイテム
+        shipping: 配送先
+        item status: 商品の状態
+        prefecture: 都道府県
+        price: 価格
+        day to ship: 発送日数
+        description: 説明
